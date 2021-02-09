@@ -20,7 +20,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/profile"
-            android:textColor="#000000"
+            android:textColor="@color/home_inactive"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/home_inactive"
+            android:background="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -94,6 +94,12 @@
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line" />
+
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
@@ -104,6 +110,12 @@
                 android:text="Help Center"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -116,6 +128,12 @@
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
@@ -126,6 +144,12 @@
                 android:text="Logout"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
