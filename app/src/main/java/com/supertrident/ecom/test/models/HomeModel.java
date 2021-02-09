@@ -1,4 +1,4 @@
-package com.supertrident.onlinestore.models;
+package com.supertrident.ecom.test.models;
 
 public class HomeModel {
     int image;

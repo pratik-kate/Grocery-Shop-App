@@ -1,4 +1,4 @@
-package com.supertrident.onlinestore.adapter;
+package com.supertrident.ecom.test.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.supertrident.onlinestore.models.HomeModel;
-import com.supertrident.onlinestore.R;
+import com.supertrident.ecom.test.models.HomeModel;
+import com.supertrident.ecom.R;
 
 import java.util.ArrayList;
 

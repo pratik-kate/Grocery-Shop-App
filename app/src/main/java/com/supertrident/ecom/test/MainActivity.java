@@ -1,4 +1,4 @@
-package com.supertrident.onlinestore;
+package com.supertrident.ecom.test;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -6,14 +6,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
-import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
-import com.supertrident.onlinestore.fragmets.CartFragment;
-import com.supertrident.onlinestore.fragmets.HomeFragment;
-import com.supertrident.onlinestore.fragmets.ProfileFragment;
+import com.supertrident.ecom.R;
+import com.supertrident.ecom.test.fragmets.CartFragment;
+import com.supertrident.ecom.test.fragmets.HomeFragment;
+import com.supertrident.ecom.test.fragmets.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 

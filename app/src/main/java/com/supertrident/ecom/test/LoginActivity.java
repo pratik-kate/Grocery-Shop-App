@@ -1,4 +1,4 @@
-package com.supertrident.onlinestore;
+package com.supertrident.ecom.test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.supertrident.ecom.R;
 
 public class LoginActivity extends AppCompatActivity {
 

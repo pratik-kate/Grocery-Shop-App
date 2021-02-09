@@ -1,4 +1,4 @@
-package com.supertrident.onlinestore.fragmets;
+package com.supertrident.ecom.test.fragmets;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.supertrident.onlinestore.R;
+import com.supertrident.ecom.R;
 
 
 public class ProfileFragment extends Fragment {

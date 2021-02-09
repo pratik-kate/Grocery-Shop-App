@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353844679658",
+    "project_id": "grocery-shop-e8bee",
+    "storage_bucket": "grocery-shop-e8bee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353844679658:android:89d0277895cf92f234d893",
+        "android_client_info": {
+          "package_name": "com.supertrident.ecom.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353844679658-1gqkmf3vik0uo1s9cajb8pgpsbmjs11t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk3qQ14MeNv1_kQMGBev4zWrnqzK_7kD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353844679658-1gqkmf3vik0uo1s9cajb8pgpsbmjs11t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

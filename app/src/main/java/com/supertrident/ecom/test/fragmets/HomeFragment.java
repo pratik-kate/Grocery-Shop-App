@@ -1,4 +1,4 @@
-package com.supertrident.onlinestore.fragmets;
+package com.supertrident.ecom.test.fragmets;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,9 +16,9 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.supertrident.onlinestore.R;
-import com.supertrident.onlinestore.adapter.HomeAdapter;
-import com.supertrident.onlinestore.models.HomeModel;
+import com.supertrident.ecom.R;
+import com.supertrident.ecom.test.adapter.HomeAdapter;
+import com.supertrident.ecom.test.models.HomeModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
