@@ -4,13 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EAEAEA"
     tools:context=".fragmets.HomeFragment">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="20dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="SHOP"
+        android:textColor="@color/home_inactive"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+    </com.daimajia.slider.library.SliderLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slider"
+        tools:listitem="@layout/design_home" />
 </androidx.constraintlayout.widget.ConstraintLayout>
