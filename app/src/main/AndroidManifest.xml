@@ -11,15 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineSore">
-        <activity android:name="com.supertrident.ecom.test.LoginActivity"></activity>
-        <activity android:name="com.supertrident.ecom.test.SplashActivity">
+        <activity android:name=".test.SignUpActivity"></activity>
+        <activity android:name=".test.LoginActivity" />
+        <activity android:name=".test.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.supertrident.ecom.test.MainActivity"></activity>
+        <activity android:name=".test.MainActivity" />
     </application>
 
 </manifest>

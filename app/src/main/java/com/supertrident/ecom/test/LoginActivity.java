@@ -12,9 +12,10 @@ import com.supertrident.ecom.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputLayout emailEntered, passwordEntered;
+    TextInputLayout phoneEntered, passwordEntered;
     Button btn_sign_in, btn_sign_up;
     TextView btn_forget_password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +26,14 @@ public class LoginActivity extends AppCompatActivity {
         btn_sign_in = findViewById(R.id.sign_in);
         btn_forget_password = findViewById(R.id.forgot_password);
         btn_sign_up = findViewById(R.id.sign_up_btn);
-        emailEntered = findViewById(R.id.logIn_email);
+        phoneEntered = findViewById(R.id.logIn_email);
         passwordEntered = findViewById(R.id.logIn_password);
+
+        btn_sign_up.setOnClickListener(v -> {
+            startActivity(new Intent(this,SignUpActivity.class));
+        });
+
+
 
 
         btn_sign_in.setOnClickListener(v -> {

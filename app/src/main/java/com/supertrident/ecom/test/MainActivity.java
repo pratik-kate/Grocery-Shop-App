@@ -17,6 +17,9 @@ import com.supertrident.ecom.test.fragmets.ProfileFragment;
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout screen;
+    public static final String INFO ="INFO";
+    public static final String USER ="USER";
+    public static final String EMAIL ="EMAIL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
