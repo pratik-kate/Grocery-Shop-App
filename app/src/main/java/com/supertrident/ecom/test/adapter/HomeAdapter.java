@@ -30,7 +30,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.viewHolder> {
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(
-                R.layout.design_home,
+                R.layout.design_categories,
                 parent,
                 false
         );
@@ -47,7 +47,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.viewHolder> {
 
         holder.image.setImageResource(model.getImage());
         holder.name.setText(model.getName());
-        holder.price.setText(model.getPrice());
+
 
         switch(position)
         {
@@ -79,13 +79,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.viewHolder> {
 
     public static class viewHolder extends RecyclerView.ViewHolder{
         ImageView image;
-        TextView name,price,shop;
+        TextView name;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             name = itemView.findViewById(R.id.name);
-            price = itemView.findViewById(R.id.price);
-            shop = itemView.findViewById(R.id.shop);
+
         }
     }
 }

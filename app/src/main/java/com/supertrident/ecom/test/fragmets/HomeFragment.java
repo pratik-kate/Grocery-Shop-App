@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,12 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.supertrident.ecom.R;
 import com.supertrident.ecom.test.adapter.HomeAdapter;
 import com.supertrident.ecom.test.models.HomeModel;
@@ -30,6 +37,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     HashMap<String, String> HashMapForURL ;
     HashMap<String, Integer> HashMapForLocalRes ;
     RecyclerView list;
+    public FirebaseDatabase database;
+    public DatabaseReference category;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -73,30 +82,57 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         sliderLayout.addOnPageChangeListener(this);
 
 
+
+        //Init Firebase
+        database = FirebaseDatabase.getInstance();
+        category = database.getReference("category");
+
+
+
+
+
         //products Grid
         list  = view.findViewById(R.id.list);
-        ArrayList<HomeModel> items = new ArrayList<>();
-
-        items.add(new HomeModel(R.drawable.demo,"product1","100","shop"));
-        items.add(new HomeModel(R.drawable.demo,"product2","300","shop"));
-        items.add(new HomeModel(R.drawable.demo,"product3","400","shop"));
-        items.add(new HomeModel(R.drawable.demo,"product4","200","shop"));
-        items.add(new HomeModel(R.drawable.demo,"product5","600","shop"));
-        items.add(new HomeModel(R.drawable.demo,"product6","700","shop"));
-        items.add(new HomeModel(R.drawable.demo,"product7","300","shop"));
-
-
-        HomeAdapter adapter = new HomeAdapter(items,getContext());
-        list.setAdapter(adapter);
+//        ArrayList<HomeModel> items = new ArrayList<>();
+//
+//        items.add(new HomeModel(R.drawable.demo,"product1"));
+//        items.add(new HomeModel(R.drawable.demo,"product2"));
+//        items.add(new HomeModel(R.drawable.demo,"product3"));
+//        items.add(new HomeModel(R.drawable.demo,"product4"));
+//        items.add(new HomeModel(R.drawable.demo,"product5"));
+//        items.add(new HomeModel(R.drawable.demo,"product6"));
+//        items.add(new HomeModel(R.drawable.demo,"product7"));
+//
+//
+//        HomeAdapter adapter = new HomeAdapter(items,getContext());
+//        list.setAdapter(adapter);
 
         GridLayoutManager layout = new GridLayoutManager(getContext(),2);
         list.setLayoutManager(layout);
 
-
-
+        loadMenu();
 
         return view;
     }
+
+    private void loadMenu() {
+        Query query = category.child("category"); // Ph4 Reading chat
+        FirebaseRecyclerOptions<HomeModel> options = new FirebaseRecyclerOptions.Builder<HomeModel>() //ph4
+                .build();
+        FirebaseRecyclerAdapter<HomeModel,HomeAdapter.viewHolder> adapter  = new FirebaseRecyclerAdapter<HomeModel, HomeAdapter.viewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull HomeAdapter.viewHolder holder, int position, @NonNull HomeModel model) {
+
+            }
+
+            @NonNull
+            @Override
+            public HomeAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return null;
+            }
+        };
+    }
+
     @Override
     public void onStop() {
 

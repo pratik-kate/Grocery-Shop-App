@@ -2,17 +2,15 @@ package com.supertrident.ecom.test.models;
 
 public class HomeModel {
     int image;
-    String name,price,shop;
+    String name;
 
     public HomeModel(){
 
     }
 
-    public HomeModel(int image, String name, String price, String shop) {
+    public HomeModel(int image, String name) {
         this.image = image;
         this.name = name;
-        this.price = price;
-        this.shop = shop;
     }
 
     public int getImage() {
@@ -31,19 +29,4 @@ public class HomeModel {
         this.name = name;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getShop() {
-        return shop;
-    }
-
-    public void setShop(String shop) {
-        this.shop = shop;
-    }
 }
