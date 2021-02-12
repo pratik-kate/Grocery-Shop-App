@@ -26,11 +26,20 @@
                 android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
 
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/line" />
+
             <TextView
                 android:id="@+id/catName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="bottom|center"
                 android:hapticFeedbackEnabled="false"
                 android:text="TextView"

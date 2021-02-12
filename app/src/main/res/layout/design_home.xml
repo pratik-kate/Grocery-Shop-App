@@ -26,6 +26,14 @@
                 android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
 
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/line" />
+
             <TextView
                 android:id="@+id/productName"
                 android:layout_width="match_parent"
@@ -34,7 +42,8 @@
                 android:gravity="bottom|center"
                 android:hapticFeedbackEnabled="false"
                 android:text="TextView"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
