@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String INFO ="INFO";
     public static final String USER ="USER";
     public static final String EMAIL ="EMAIL";
+    public static final String CATID ="CATID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

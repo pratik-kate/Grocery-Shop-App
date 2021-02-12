@@ -1,6 +1,7 @@
 package com.supertrident.ecom.test.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.supertrident.ecom.R;
+import com.supertrident.ecom.test.MainActivity;
+import com.supertrident.ecom.test.ShopActivity;
 import com.supertrident.ecom.test.models.HomeModel;
 
 import java.util.ArrayList;
@@ -47,7 +50,19 @@ public class MenuViewHolder extends RecyclerView.Adapter<MenuViewHolder.ViewHold
 
         Glide.with(context)
                 .load(modelArrayList.get(position).getImageUrl())
+                .override(250,250)
                 .into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, ShopActivity.class);
+                intent.setType("text");
+                intent.putExtra(MainActivity.CATID,position);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

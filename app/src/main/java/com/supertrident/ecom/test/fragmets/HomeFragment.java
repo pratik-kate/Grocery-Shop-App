@@ -121,6 +121,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                menuViewHolder = new MenuViewHolder(getContext(),modelArrayList);
                list.setAdapter(menuViewHolder);
                menuViewHolder.notifyDataSetChanged();
+
            }
 
            @Override
