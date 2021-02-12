@@ -1,23 +1,23 @@
 package com.supertrident.ecom.test.models;
 
 public class HomeModel {
-    int image;
+    String image;
     String name;
 
     public HomeModel(){
 
     }
 
-    public HomeModel(int image, String name) {
+    public HomeModel(String image, String name) {
         this.image = image;
         this.name = name;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

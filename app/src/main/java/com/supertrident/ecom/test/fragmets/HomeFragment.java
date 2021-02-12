@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -19,15 +18,13 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import com.squareup.picasso.Picasso;
 import com.supertrident.ecom.R;
-import com.supertrident.ecom.test.adapter.HomeAdapter;
+import com.supertrident.ecom.test.adapter.MenuViewHolder;
 import com.supertrident.ecom.test.models.HomeModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HomeFragment extends Fragment implements BaseSliderView.OnSliderClickListener,
@@ -37,8 +34,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     HashMap<String, String> HashMapForURL ;
     HashMap<String, Integer> HashMapForLocalRes ;
     RecyclerView list;
-    public FirebaseDatabase database;
-    public DatabaseReference category;
+
+    FirebaseRecyclerOptions<HomeModel> options;
+    FirebaseRecyclerAdapter<HomeModel,MenuViewHolder> adapter;
+    DatabaseReference databaseReference;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -82,81 +81,69 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         sliderLayout.addOnPageChangeListener(this);
 
 
-
-        //Init Firebase
-        database = FirebaseDatabase.getInstance();
-        category = database.getReference("category");
-
-
-
-
-
-        //products Grid
         list  = view.findViewById(R.id.list);
-//        ArrayList<HomeModel> items = new ArrayList<>();
-//
-//        items.add(new HomeModel(R.drawable.demo,"product1"));
-//        items.add(new HomeModel(R.drawable.demo,"product2"));
-//        items.add(new HomeModel(R.drawable.demo,"product3"));
-//        items.add(new HomeModel(R.drawable.demo,"product4"));
-//        items.add(new HomeModel(R.drawable.demo,"product5"));
-//        items.add(new HomeModel(R.drawable.demo,"product6"));
-//        items.add(new HomeModel(R.drawable.demo,"product7"));
-//
-//
-//        HomeAdapter adapter = new HomeAdapter(items,getContext());
-//        list.setAdapter(adapter);
+        list.setHasFixedSize(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("category");
 
-        GridLayoutManager layout = new GridLayoutManager(getContext(),2);
-        list.setLayoutManager(layout);
-
-        loadMenu();
+        LoadData();
 
         return view;
     }
 
-    private void loadMenu() {
-        Query query = category.child("category"); // Ph4 Reading chat
-        FirebaseRecyclerOptions<HomeModel> options = new FirebaseRecyclerOptions.Builder<HomeModel>() //ph4
-                .build();
-        FirebaseRecyclerAdapter<HomeModel,HomeAdapter.viewHolder> adapter  = new FirebaseRecyclerAdapter<HomeModel, HomeAdapter.viewHolder>(options) {
+    private void LoadData() {
+
+        options = new FirebaseRecyclerOptions.Builder<HomeModel>().setQuery(databaseReference,HomeModel.class).build();
+        adapter = new FirebaseRecyclerAdapter<HomeModel, MenuViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull HomeAdapter.viewHolder holder, int position, @NonNull HomeModel model) {
+            protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull HomeModel model) {
+                holder.name.setText(model.getName());
+               Picasso.with(getContext()).load(model.getImage())
+                       .into(holder.image);
 
             }
 
             @NonNull
             @Override
-            public HomeAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+            public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.design_categories,parent,false);
+
+                return new MenuViewHolder(v);
             }
         };
+        adapter.startListening();
+        list.setAdapter(adapter);
     }
+
+
+
+
+
 
     @Override
-    public void onStop() {
-
-        sliderLayout.stopAutoCycle();
-
-        super.onStop();
+    public void onStart()
+    {
+        super.onStart();
+        //adapter.startListening();
     }
-
-
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        sliderLayout.stopAutoCycle();
+        //adapter.stopListening();
+    }
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-
     @Override
     public void onPageSelected(int position) {
 
         Log.d("Slider Demo", "Page Changed: " + position);
 
     }
-
     @Override
     public void onPageScrollStateChanged(int state) {
 
     }
-
     public void AddImagesUrlOnline(){
 
         HashMapForURL = new HashMap<String, String>();
@@ -167,7 +154,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         HashMapForURL.put("Froyo", "http://androidblog.esy.es/images/froyo-4.png");
         HashMapForURL.put("GingerBread", "http://androidblog.esy.es/images/gingerbread-5.png");
     }
-
     public void AddImageUrlFormLocalRes(){
 
         HashMapForLocalRes = new HashMap<String, Integer>();
@@ -176,7 +162,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         HashMapForLocalRes.put("product2", R.drawable.demo3);
         HashMapForLocalRes.put("product3", R.drawable.demo3);
     }
-
     @Override
     public void onSliderClick(BaseSliderView slider) {
 
