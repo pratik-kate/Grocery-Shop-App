@@ -1,5 +1,6 @@
 package com.supertrident.ecom.test.fragmets;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -18,13 +20,18 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.supertrident.ecom.R;
 import com.supertrident.ecom.test.adapter.MenuViewHolder;
 import com.supertrident.ecom.test.models.HomeModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HomeFragment extends Fragment implements BaseSliderView.OnSliderClickListener,
@@ -34,10 +41,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     HashMap<String, String> HashMapForURL ;
     HashMap<String, Integer> HashMapForLocalRes ;
     RecyclerView list;
+    private DatabaseReference myref;
+    private ArrayList<HomeModel> modelArrayList;
+    private MenuViewHolder menuViewHolder;
+    private Context mcontext;
 
-    FirebaseRecyclerOptions<HomeModel> options;
-    FirebaseRecyclerAdapter<HomeModel,MenuViewHolder> adapter;
-    DatabaseReference databaseReference;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -48,7 +56,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         //banner
         sliderLayout = (SliderLayout)view.findViewById(R.id.slider);
         AddImageUrlFormLocalRes();
@@ -80,43 +87,61 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         sliderLayout.setDuration(3000);
         sliderLayout.addOnPageChangeListener(this);
 
-
-        list  = view.findViewById(R.id.list);
+        //Showing Categories
+        list = view.findViewById(R.id.list);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
+        list.setLayoutManager(layoutManager);
         list.setHasFixedSize(true);
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("category");
 
-        LoadData();
+        myref = FirebaseDatabase.getInstance().getReference();
+
+        modelArrayList = new ArrayList<>();
+        clearAll();
+        getDataFromFirebase();
+
+
 
         return view;
     }
 
-    private void LoadData() {
+    private void getDataFromFirebase() {
 
-        options = new FirebaseRecyclerOptions.Builder<HomeModel>().setQuery(databaseReference,HomeModel.class).build();
-        adapter = new FirebaseRecyclerAdapter<HomeModel, MenuViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull HomeModel model) {
-                holder.name.setText(model.getName());
-               Picasso.with(getContext()).load(model.getImage())
-                       .into(holder.image);
+        Query query = myref.child("category");
+       query.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               clearAll();
+               for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                   HomeModel mode = new HomeModel();
+                   mode.setImageUrl(snapshot.child("image").getValue().toString());
+                   mode.setName(snapshot.child("name").getValue().toString());
 
-            }
+                   modelArrayList.add(mode);
+               }
+               menuViewHolder = new MenuViewHolder(getContext(),modelArrayList);
+               list.setAdapter(menuViewHolder);
+               menuViewHolder.notifyDataSetChanged();
+           }
 
-            @NonNull
-            @Override
-            public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.design_categories,parent,false);
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
 
-                return new MenuViewHolder(v);
-            }
-        };
-        adapter.startListening();
-        list.setAdapter(adapter);
+           }
+       });
+
     }
 
+    private  void clearAll(){
+        if(modelArrayList != null){
+            modelArrayList.clear();
 
-
-
+            if(menuViewHolder != null){
+                menuViewHolder.notifyDataSetChanged();
+            }
+        }else{
+            modelArrayList = new ArrayList<>();
+        }
+    }
 
 
     @Override
