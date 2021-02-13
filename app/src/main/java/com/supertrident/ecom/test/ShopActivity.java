@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,11 +33,14 @@ public class ShopActivity extends AppCompatActivity {
     private DatabaseReference myref;
     private ArrayList<ProductModel> modelArrayList;
     private ProductViewHolder menuViewHolder;
+    private ShimmerFrameLayout shimmerFrameLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
         getSupportActionBar().setTitle("Products");
+        shimmerFrameLayout = findViewById(R.id.shimmerLayout);
+        shimmerFrameLayout.startShimmer();
 
 
         Intent intent = getIntent();
@@ -72,9 +77,11 @@ public class ShopActivity extends AppCompatActivity {
 
                     modelArrayList.add(mode);
                 }
-                menuViewHolder = new ProductViewHolder(getApplicationContext(),modelArrayList);
+                menuViewHolder = new ProductViewHolder(ShopActivity.this,modelArrayList);
                 recyclerView.setAdapter(menuViewHolder);
                 menuViewHolder.notifyDataSetChanged();
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.INVISIBLE);
 
             }
 

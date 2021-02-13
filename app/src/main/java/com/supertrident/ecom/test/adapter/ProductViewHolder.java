@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.supertrident.ecom.R;
 import com.supertrident.ecom.test.MainActivity;
+import com.supertrident.ecom.test.ProductDetailActivity;
 import com.supertrident.ecom.test.ShopActivity;
 import com.supertrident.ecom.test.models.HomeModel;
 import com.supertrident.ecom.test.models.ProductModel;
@@ -59,6 +60,12 @@ public class ProductViewHolder extends RecyclerView.Adapter<ProductViewHolder.Vi
             @Override
             public void onClick(View v) {
 
+                Intent product = new Intent(context, ProductDetailActivity.class);
+                product.setType("text");
+                product.putExtra(MainActivity.PID,modelArrayList.get(position).getName());
+                product.putExtra(MainActivity.PDEC,modelArrayList.get(position).getDescription());
+                product.putExtra(MainActivity.PIMG,modelArrayList.get(position).getImage());
+                context.startActivity(product);
 
             }
         });

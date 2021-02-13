@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String USER ="USER";
     public static final String EMAIL ="EMAIL";
     public static final String CATID ="CATID";
+    public static final String PID ="PID";
+    public static final String PDEC ="PDEC";
+    public static final String PIMG ="PIMG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

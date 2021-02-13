@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineSore">
-        <activity android:name=".test.ShopActivity"></activity>
+        <activity android:name=".test.ProductDetailActivity"></activity>
+        <activity android:name=".test.ShopActivity" />
         <activity android:name=".test.SignUpActivity" />
         <activity android:name=".test.LoginActivity" />
         <activity android:name=".test.SplashActivity">

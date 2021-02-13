@@ -18,6 +18,8 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.facebook.shimmer.ShimmerDrawable;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -45,6 +47,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private ArrayList<HomeModel> modelArrayList;
     private MenuViewHolder menuViewHolder;
     private Context mcontext;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
 
     public HomeFragment() {
@@ -56,6 +59,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        shimmerFrameLayout = view.findViewById(R.id.shimmerLayout);
+        shimmerFrameLayout.startShimmer();
         //banner
         sliderLayout = (SliderLayout)view.findViewById(R.id.slider);
         AddImageUrlFormLocalRes();
@@ -121,6 +127,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                menuViewHolder = new MenuViewHolder(getContext(),modelArrayList);
                list.setAdapter(menuViewHolder);
                menuViewHolder.notifyDataSetChanged();
+               shimmerFrameLayout.stopShimmer();
+               shimmerFrameLayout.setVisibility(View.INVISIBLE);
 
            }
 
