@@ -65,6 +65,7 @@ public class ProductViewHolder extends RecyclerView.Adapter<ProductViewHolder.Vi
                 product.putExtra(MainActivity.PID,modelArrayList.get(position).getName());
                 product.putExtra(MainActivity.PDEC,modelArrayList.get(position).getDescription());
                 product.putExtra(MainActivity.PIMG,modelArrayList.get(position).getImage());
+                product.putExtra(MainActivity.PPRICE,modelArrayList.get(position).getPrice());
                 context.startActivity(product);
 
             }

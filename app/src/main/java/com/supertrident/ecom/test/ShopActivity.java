@@ -73,6 +73,7 @@ public class ShopActivity extends AppCompatActivity {
 
                     mode.setName(snapshot.child("name").getValue().toString());
                     mode.setPrice(snapshot.child("price").getValue().toString());
+                    mode.setDescription(snapshot.child("description").getValue().toString());
                     mode.setImage(snapshot.child("image").getValue().toString());
 
                     modelArrayList.add(mode);

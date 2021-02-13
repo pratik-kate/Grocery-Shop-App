@@ -16,6 +16,7 @@ import com.supertrident.ecom.test.fragmets.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String PPRICE ="PPRICE";
     LinearLayout screen;
     public static final String INFO ="INFO";
     public static final String USER ="USER";
