@@ -17,6 +17,11 @@ import com.supertrident.ecom.test.fragmets.ProfileFragment;
 public class MainActivity extends AppCompatActivity {
 
     public static final String PPRICE ="PPRICE";
+    public static final String CART = "CART";
+    public static final String PRODUCT ="PRODUCT" ;
+    public static final String PRODUCTIMAGE = "PRODUCTIMAGE";
+    public static final String PRODUCTPRICE = "PRODUCTPRICE" ;
+    public static int CARTCOUNTER= 0;
     LinearLayout screen;
     public static final String INFO ="INFO";
     public static final String USER ="USER";
