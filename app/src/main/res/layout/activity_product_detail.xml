@@ -74,7 +74,6 @@
                 android:text="00"
                 android:textColor="#302E2E"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/pcart"
                 app:layout_constraintStart_toEndOf="@+id/pprice3"
                 app:layout_constraintTop_toBottomOf="@+id/pname" />
 
@@ -88,15 +87,23 @@
                 android:text="Price:"
                 android:textColor="#302E2E"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/pcart"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pname" />
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/design_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/pprice"
+                app:layout_constraintStart_toStartOf="@+id/pprice3"
+                app:layout_constraintTop_toBottomOf="@+id/pprice3" />
 
             <TextView
                 android:id="@+id/pbuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/button_background"
                 android:fontFamily="sans-serif-medium"
@@ -104,8 +111,9 @@
                 android:text="BUY NOW"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/pcart"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pname" />
+                app:layout_constraintTop_toTopOf="@+id/pcart" />
 
             <TextView
                 android:id="@+id/pcart"
@@ -119,6 +127,7 @@
                 android:text="ADD TO CART"
                 android:textColor="@color/home_inactive"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/include"
                 app:layout_constraintEnd_toStartOf="@+id/pbuy"
                 app:layout_constraintTop_toBottomOf="@+id/pname" />
 
@@ -126,10 +135,10 @@
                 android:id="@+id/imageView13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pcart"
+                app:layout_constraintTop_toBottomOf="@+id/include"
                 app:srcCompat="@drawable/line" />
 
             <TextView

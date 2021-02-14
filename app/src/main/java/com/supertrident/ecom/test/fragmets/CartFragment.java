@@ -5,15 +5,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.supertrident.ecom.R;
 import com.supertrident.ecom.test.MainActivity;
+import com.supertrident.ecom.test.adapter.CartAdapter;
+import com.supertrident.ecom.test.models.CartModel;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -25,6 +30,8 @@ public class CartFragment extends Fragment {
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> price = new ArrayList<>();
     ArrayList<String> image = new ArrayList<>();
+    ArrayList<String> quantity = new ArrayList<>();
+    RecyclerView list;
 
     TextView textView;
     public CartFragment() {
@@ -37,6 +44,7 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_cart, container, false);
+       // textView = view.findViewById(R.id.textView3);
 
 
         try {
@@ -45,19 +53,34 @@ public class CartFragment extends Fragment {
                 String s = MainActivity.PRODUCT+i;
                 String im = MainActivity.PRODUCTIMAGE+i;
                 String pr = MainActivity.PRODUCTPRICE+i;
+                String q = MainActivity.PRODUCTQUANTITY+i;
 
                 name.add(pref.getString(s, "empty"));
                 price.add(pref.getString(pr, "empty"));
                 image.add(pref.getString(im, "empty"));
-                textView.append(image.get(i-1));
-                textView.append("\n");
+                quantity.add(pref.getString(q, "empty"));
+//                textView.append(quantity.get(i-1));
+//                textView.append("\n");
 
                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
            }
-
         }catch (Exception e){
             textView.setText("Cart Empty");
         }
+
+        list = view.findViewById(R.id.cartlist);
+
+        ArrayList<CartModel> items = new ArrayList<>();
+        for(int i = 0 ; i< MainActivity.CARTCOUNTER; i++) {
+            items.add(new CartModel(name.get(i), image.get(i), price.get(i), quantity.get(i)));
+        }
+
+
+        CartAdapter adapter = new CartAdapter(items,getContext());
+        list.setAdapter(adapter);
+
+        LinearLayoutManager layout = new LinearLayoutManager(getContext());
+        list.setLayoutManager(layout);
 
         return view;
     }

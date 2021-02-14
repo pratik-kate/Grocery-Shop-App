@@ -21,6 +21,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     String name,image,desc,price;
     TextView pname,pprice,pdesc,pbuy,pcart;
     ImageView pimage,back;
+    TextView quantity,add,remove;
+    public int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,23 @@ public class ProductDetailActivity extends AppCompatActivity {
         pcart = findViewById(R.id.pcart);
         back = findViewById(R.id.pback);
 
+        //quantity
+        quantity = findViewById(R.id.quantity);
+        add = findViewById(R.id.plus);
+        remove = findViewById(R.id.minus);
+
+        add.setOnClickListener(v -> {
+            count++;
+            quantity.setText(String.valueOf(count));
+        });
+        remove.setOnClickListener(v -> {
+            if(count>0) {
+                count--;
+                quantity.setText(String.valueOf(count));
+            }
+        });
+
+
         ConstraintLayout layout = findViewById(R.id.layout);
         pname.setText(name);
         pprice.setText(price);
@@ -61,11 +80,14 @@ public class ProductDetailActivity extends AppCompatActivity {
             String p = MainActivity.PRODUCT+ MainActivity.CARTCOUNTER;
             String i = MainActivity.PRODUCTIMAGE+MainActivity.CARTCOUNTER;
             String pr = MainActivity.PRODUCTPRICE+MainActivity.CARTCOUNTER;
+            String q = MainActivity.PRODUCTQUANTITY+MainActivity.CARTCOUNTER;
+            String coun = String.valueOf(count);
 
             SharedPreferences.Editor editor = getSharedPreferences(MainActivity.CART,MODE_PRIVATE).edit();
             editor.putString(p,name);
             editor.putString(i,image);
             editor.putString(pr,price);
+            editor.putString(q,coun);
             editor.apply();
             editor.commit();
             Toast.makeText(this, "Added "+p, Toast.LENGTH_SHORT).show();

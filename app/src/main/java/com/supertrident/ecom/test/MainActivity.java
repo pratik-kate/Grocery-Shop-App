@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String PRODUCT ="PRODUCT" ;
     public static final String PRODUCTIMAGE = "PRODUCTIMAGE";
     public static final String PRODUCTPRICE = "PRODUCTPRICE" ;
+    public static final String  PRODUCTQUANTITY = "PRODUCTQUANTITY" ;
     public static int CARTCOUNTER= 0;
     LinearLayout screen;
     public static final String INFO ="INFO";
