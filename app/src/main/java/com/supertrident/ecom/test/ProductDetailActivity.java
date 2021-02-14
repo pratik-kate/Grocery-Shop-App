@@ -56,10 +56,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         back.setOnClickListener(v -> {super.onBackPressed();});
 
         pcart.setOnClickListener(v -> {
-//            Set<String> set = new HashSet<String>();
-//            set.add(name);
-//            set.add(image);
-//            set.add(price);
+
             MainActivity.CARTCOUNTER++;
             String p = MainActivity.PRODUCT+ MainActivity.CARTCOUNTER;
             String i = MainActivity.PRODUCTIMAGE+MainActivity.CARTCOUNTER;

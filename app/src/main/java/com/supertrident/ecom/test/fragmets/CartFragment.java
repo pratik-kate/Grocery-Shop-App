@@ -38,8 +38,8 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_cart, container, false);
 
-        textView = view.findViewById(R.id.ctext);
-      //  try {
+
+        try {
             SharedPreferences pref = getActivity().getSharedPreferences(MainActivity.CART, Context.MODE_PRIVATE);
             for (int i = 1; i <= MainActivity.CARTCOUNTER; i++) {
                 String s = MainActivity.PRODUCT+i;
@@ -54,10 +54,10 @@ public class CartFragment extends Fragment {
 
                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
            }
-//
-//        }catch (Exception e){
-//            textView.setText("Cart Empty");
-//        }
+
+        }catch (Exception e){
+            textView.setText("Cart Empty");
+        }
 
         return view;
     }
