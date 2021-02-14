@@ -1,5 +1,6 @@
 package com.supertrident.ecom.test.fragmets;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,18 +27,18 @@ import java.util.Set;
 
 public class CartFragment extends Fragment {
 
-
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> price = new ArrayList<>();
     ArrayList<String> image = new ArrayList<>();
     ArrayList<String> quantity = new ArrayList<>();
+    ArrayList<CartModel> items;
     RecyclerView list;
+    TextView textView,placeOrder;
+    CartAdapter adapter;
 
-    TextView textView;
     public CartFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +46,6 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_cart, container, false);
        textView = view.findViewById(R.id.textView3);
-
 
         try {
             SharedPreferences pref = getActivity().getSharedPreferences(MainActivity.CART, Context.MODE_PRIVATE);
@@ -59,22 +59,33 @@ public class CartFragment extends Fragment {
                 price.add(String.valueOf(Integer.parseInt(pref.getString(pr, "0"))*Integer.parseInt(pref.getString(q,"0"))));
                 image.add(pref.getString(im, "empty"));
                 quantity.add(pref.getString(q, "empty"));
-
                // Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
            }
             list = view.findViewById(R.id.cartlist);
-            ArrayList<CartModel> items = new ArrayList<>();
+            items = new ArrayList<>();
             for(int i = 0 ; i< MainActivity.CARTCOUNTER; i++) {
                 items.add(new CartModel(name.get(i), image.get(i), price.get(i), quantity.get(i)));
             }
-            CartAdapter adapter = new CartAdapter(items,getContext());
+            if(name.isEmpty()){
+                textView.setVisibility(View.VISIBLE);
+            }
+            adapter = new CartAdapter(items,getContext());
             list.setAdapter(adapter);
             LinearLayoutManager layout = new LinearLayoutManager(getContext());
             list.setLayoutManager(layout);
         }catch (Exception e){
-            textView.setVisibility(View.VISIBLE);
             textView.setText("Cart Empty");
         }
+        placeOrder = view.findViewById(R.id.placeOrder);
+        placeOrder.setOnClickListener(v -> {
+            if(!name.isEmpty()) {
+                items.clear();
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Your Order has Been Placed", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getContext(), "Please Add Items To Cart First", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 }
