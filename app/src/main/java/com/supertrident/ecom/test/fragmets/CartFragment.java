@@ -44,7 +44,7 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_cart, container, false);
-       // textView = view.findViewById(R.id.textView3);
+       textView = view.findViewById(R.id.textView3);
 
 
         try {
@@ -56,32 +56,25 @@ public class CartFragment extends Fragment {
                 String q = MainActivity.PRODUCTQUANTITY+i;
 
                 name.add(pref.getString(s, "empty"));
-                price.add(pref.getString(pr, "empty"));
+                price.add(String.valueOf(Integer.parseInt(pref.getString(pr, "0"))*Integer.parseInt(pref.getString(q,"0"))));
                 image.add(pref.getString(im, "empty"));
                 quantity.add(pref.getString(q, "empty"));
-//                textView.append(quantity.get(i-1));
-//                textView.append("\n");
 
-                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
            }
+            list = view.findViewById(R.id.cartlist);
+            ArrayList<CartModel> items = new ArrayList<>();
+            for(int i = 0 ; i< MainActivity.CARTCOUNTER; i++) {
+                items.add(new CartModel(name.get(i), image.get(i), price.get(i), quantity.get(i)));
+            }
+            CartAdapter adapter = new CartAdapter(items,getContext());
+            list.setAdapter(adapter);
+            LinearLayoutManager layout = new LinearLayoutManager(getContext());
+            list.setLayoutManager(layout);
         }catch (Exception e){
+            textView.setVisibility(View.VISIBLE);
             textView.setText("Cart Empty");
         }
-
-        list = view.findViewById(R.id.cartlist);
-
-        ArrayList<CartModel> items = new ArrayList<>();
-        for(int i = 0 ; i< MainActivity.CARTCOUNTER; i++) {
-            items.add(new CartModel(name.get(i), image.get(i), price.get(i), quantity.get(i)));
-        }
-
-
-        CartAdapter adapter = new CartAdapter(items,getContext());
-        list.setAdapter(adapter);
-
-        LinearLayoutManager layout = new LinearLayoutManager(getContext());
-        list.setLayoutManager(layout);
-
         return view;
     }
 }
