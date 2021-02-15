@@ -22,7 +22,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView pname,pprice,pdesc,pbuy,pcart;
     ImageView pimage,back;
     TextView quantity,add,remove;
-    public int count=0;
+    public int count=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
