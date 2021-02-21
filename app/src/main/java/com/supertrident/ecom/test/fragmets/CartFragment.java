@@ -35,6 +35,7 @@ public class CartFragment extends Fragment {
     RecyclerView list;
     TextView textView,placeOrder;
     CartAdapter adapter;
+    SharedPreferences pref;
 
     public CartFragment() {
         // Required empty public constructor
@@ -48,7 +49,8 @@ public class CartFragment extends Fragment {
        textView = view.findViewById(R.id.textView3);
 
         try {
-            SharedPreferences pref = getActivity().getSharedPreferences(MainActivity.CART, Context.MODE_PRIVATE);
+            pref = getActivity().getSharedPreferences(MainActivity.CART, Context.MODE_PRIVATE);
+
             for (int i = 1; i <= MainActivity.CARTCOUNTER; i++) {
                 String s = MainActivity.PRODUCT+i;
                 String im = MainActivity.PRODUCTIMAGE+i;
@@ -63,16 +65,20 @@ public class CartFragment extends Fragment {
            }
             list = view.findViewById(R.id.cartlist);
             items = new ArrayList<>();
-            for(int i = 0 ; i< MainActivity.CARTCOUNTER; i++) {
-                items.add(new CartModel(name.get(i), image.get(i), price.get(i), quantity.get(i)));
-            }
-            if(name.isEmpty()){
+            if(name.get(0).contains("empty")){
                 textView.setVisibility(View.VISIBLE);
+            }else{
+                for(int i = 0 ; i< MainActivity.CARTCOUNTER; i++) {
+                    items.add(new CartModel(name.get(i), image.get(i), price.get(i), quantity.get(i)));
+                }
+                adapter = new CartAdapter(items,getContext());
+                list.setAdapter(adapter);
+                list.hasFixedSize();
+                adapter.notifyDataSetChanged();
+                LinearLayoutManager layout = new LinearLayoutManager(getContext());
+                list.setLayoutManager(layout);
             }
-            adapter = new CartAdapter(items,getContext());
-            list.setAdapter(adapter);
-            LinearLayoutManager layout = new LinearLayoutManager(getContext());
-            list.setLayoutManager(layout);
+
         }catch (Exception e){
             textView.setText("Cart Empty");
         }
@@ -80,6 +86,11 @@ public class CartFragment extends Fragment {
         placeOrder.setOnClickListener(v -> {
             if(!name.isEmpty()) {
                 items.clear();
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(MainActivity.CART,Context.MODE_PRIVATE).edit();
+                editor.clear();
+                editor.apply();
+                editor.commit();
+                adapter.notifyItemRangeRemoved(0, items.size());
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getContext(), "Your Order has Been Placed", Toast.LENGTH_SHORT).show();
             }else{
