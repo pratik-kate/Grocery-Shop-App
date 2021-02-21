@@ -1,28 +1,26 @@
 package com.supertrident.ecom.test.fragmets;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.supertrident.ecom.R;
+import com.supertrident.ecom.test.CheckOutActivity;
 import com.supertrident.ecom.test.MainActivity;
 import com.supertrident.ecom.test.adapter.CartAdapter;
 import com.supertrident.ecom.test.models.CartModel;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 
 public class CartFragment extends Fragment {
@@ -85,6 +83,15 @@ public class CartFragment extends Fragment {
         placeOrder = view.findViewById(R.id.placeOrder);
         placeOrder.setOnClickListener(v -> {
             if(!name.isEmpty()) {
+                //Placing Order
+
+                Intent checkout = new Intent(getContext(), CheckOutActivity.class);
+                checkout.putExtra(MainActivity.PRODUCT,name);
+                checkout.putExtra(MainActivity.PRODUCTPRICE,price);
+                checkout.putExtra(MainActivity.PRODUCTQUANTITY,quantity);
+                startActivity(checkout);
+
+
                 items.clear();
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences(MainActivity.CART,Context.MODE_PRIVATE).edit();
                 editor.clear();
