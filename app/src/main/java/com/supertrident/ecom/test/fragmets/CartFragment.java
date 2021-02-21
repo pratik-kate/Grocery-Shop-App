@@ -75,6 +75,7 @@ public class CartFragment extends Fragment {
                 adapter.notifyDataSetChanged();
                 LinearLayoutManager layout = new LinearLayoutManager(getContext());
                 list.setLayoutManager(layout);
+
             }
 
         }catch (Exception e){
@@ -99,6 +100,7 @@ public class CartFragment extends Fragment {
                 editor.commit();
                 adapter.notifyItemRangeRemoved(0, items.size());
                 adapter.notifyDataSetChanged();
+                placeOrder.setClickable(false);
                 Toast.makeText(getContext(), "Your Order has Been Placed", Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getContext(), "Please Add Items To Cart First", Toast.LENGTH_SHORT).show();

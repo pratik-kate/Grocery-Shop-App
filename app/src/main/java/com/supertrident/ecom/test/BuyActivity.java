@@ -21,14 +21,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CheckOutActivity extends AppCompatActivity implements Serializable {
+public class BuyActivity extends AppCompatActivity implements Serializable {
 
     TextInputLayout name,phone,address,pincode,landmark;
     TextView next;
-    ArrayList<String> namee = new ArrayList<>();
-    ArrayList<String> price = new ArrayList<>();
-    ArrayList<String> quantity = new ArrayList<>();
-    String namearr="";
+    String namee,quantity,namearr="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +40,12 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable 
         next = findViewById(R.id.next);
 
         Intent intent = getIntent();
-        namee = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCT);
-        // price = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCTPRICE);
-        quantity = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCTQUANTITY);
 
-        for(int i=0;i<namee.size();i++){
-            namearr += namee.get(i)+":"+quantity.get(i)+";";
-        }
+        namee = intent.getStringExtra(MainActivity.PRODUCT);
+        quantity = intent.getStringExtra(MainActivity.PRODUCTQUANTITY);
+
+            namearr += namee+":"+quantity+";";
+
 
         next.setOnClickListener(v -> {
             String n = name.getEditText().getText().toString().trim();
@@ -86,29 +82,29 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable 
                 return;
             }
 
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("name", name.getEditText().getText().toString().trim());
-                map.put("phone", phone.getEditText().getText().toString().trim());
-                map.put("address", address.getEditText().getText().toString().trim());
-                map.put("pincode", pincode.getEditText().getText().toString().trim());
-                map.put("landmark", landmark.getEditText().getText().toString().trim());
-                map.put("Products", namearr);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", name.getEditText().getText().toString().trim());
+            map.put("phone", phone.getEditText().getText().toString().trim());
+            map.put("address", address.getEditText().getText().toString().trim());
+            map.put("pincode", pincode.getEditText().getText().toString().trim());
+            map.put("landmark", landmark.getEditText().getText().toString().trim());
+            map.put("Products", namearr);
 
 
-                FirebaseDatabase.getInstance().getReference().child("orders").child(name.getEditText().getText().toString().trim()).setValue(map)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
+            FirebaseDatabase.getInstance().getReference().child("orders").child(name.getEditText().getText().toString().trim()).setValue(map)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 
-                                Toast.makeText(CheckOutActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(BuyActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-                        Toast.makeText(CheckOutActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    Toast.makeText(BuyActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         });
 
