@@ -13,15 +13,21 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.FirebaseDatabase;
+import com.razorpay.Checkout;
+import com.razorpay.CheckoutActivity;
+import com.razorpay.PaymentResultListener;
 import com.supertrident.ecom.R;
 import com.supertrident.ecom.test.models.CartModel;
 import com.supertrident.ecom.test.models.FinalModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CheckOutActivity extends AppCompatActivity implements Serializable {
+public class CheckOutActivity extends AppCompatActivity implements Serializable, PaymentResultListener {
 
     TextInputLayout name,phone,address,pincode,landmark;
     TextView next;
@@ -29,6 +35,7 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable 
     ArrayList<String> price = new ArrayList<>();
     ArrayList<String> quantity = new ArrayList<>();
     String namearr="";
+    int amount,round;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +51,17 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable 
 
         Intent intent = getIntent();
         namee = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCT);
-        // price = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCTPRICE);
+        price = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCTPRICE);
         quantity = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCTQUANTITY);
 
         for(int i=0;i<namee.size();i++){
             namearr += namee.get(i)+":"+quantity.get(i)+";";
         }
+        //Calculating total
+        for(int j=0;j<price.size();j++){
+            round += Integer.parseInt(price.get(j));
+        }
+        amount = Math.round(Float.parseFloat(String.valueOf(round))*100);
 
         next.setOnClickListener(v -> {
             String n = name.getEditText().getText().toString().trim();
@@ -86,32 +98,68 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable 
                 return;
             }
 
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("name", name.getEditText().getText().toString().trim());
-                map.put("phone", phone.getEditText().getText().toString().trim());
-                map.put("address", address.getEditText().getText().toString().trim());
-                map.put("pincode", pincode.getEditText().getText().toString().trim());
-                map.put("landmark", landmark.getEditText().getText().toString().trim());
-                map.put("Products", namearr);
+            Checkout checkout = new Checkout();
+            checkout.setKeyID("rzp_test_w2JRJKGgRk1Q40");
+            checkout.setImage(R.drawable.ic_shop);
+            JSONObject object = new JSONObject();
+            try {
+                object.put("name","Grocery Shop");
+                object.put("description","Make Payment For Your Order");
+                object.put("theme.color","#FF6D00");
+                object.put("currency","INR");
+                object.put("amount",amount);
+                object.put("prefill.contact","8530899088");
+                object.put("prefill.email","test@razorpay.com");
+
+                checkout.open(CheckOutActivity.this,object);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
-                FirebaseDatabase.getInstance().getReference().child("orders").child(name.getEditText().getText().toString().trim()).setValue(map)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                                Toast.makeText(CheckOutActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        Toast.makeText(CheckOutActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
         });
 
+
+    }
+
+    @Override
+    public void onPaymentSuccess(String s) {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name.getEditText().getText().toString().trim());
+        map.put("phone", phone.getEditText().getText().toString().trim());
+        map.put("address", address.getEditText().getText().toString().trim());
+        map.put("pincode", pincode.getEditText().getText().toString().trim());
+        map.put("landmark", landmark.getEditText().getText().toString().trim());
+        map.put("Products", namearr);
+        map.put("PaymentId",s);
+        map.put("Amount",amount/100);
+
+
+        FirebaseDatabase.getInstance().getReference().child("orders").child(name.getEditText().getText().toString().trim()).setValue(map)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Toast.makeText(CheckOutActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        Intent home = new Intent(CheckOutActivity.this,MainActivity.class);
+                        startActivity(home);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(CheckOutActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Toast.makeText(this, "Payment Failed "+s, Toast.LENGTH_SHORT).show();
 
     }
 }
