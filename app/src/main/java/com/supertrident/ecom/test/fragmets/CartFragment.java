@@ -61,22 +61,25 @@ public class CartFragment extends Fragment {
                 quantity.add(pref.getString(q, "empty"));
                // Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
            }
-            list = view.findViewById(R.id.cartlist);
-            items = new ArrayList<>();
+
             if(name.get(0).contains("empty")){
                 textView.setVisibility(View.VISIBLE);
-            }else{
-                for(int i = 0 ; i< MainActivity.CARTCOUNTER; i++) {
+            }else {
+                list = view.findViewById(R.id.cartlist);
+                items = new ArrayList<>();
+                for (int i = 0; i < MainActivity.CARTCOUNTER; i++) {
                     items.add(new CartModel(name.get(i), image.get(i), price.get(i), quantity.get(i)));
                 }
-                adapter = new CartAdapter(items,getContext());
+                adapter = new CartAdapter(items, getContext());
                 list.setAdapter(adapter);
                 list.hasFixedSize();
                 adapter.notifyDataSetChanged();
                 LinearLayoutManager layout = new LinearLayoutManager(getContext());
                 list.setLayoutManager(layout);
-
+                textView.setVisibility(View.INVISIBLE);
             }
+
+
 
         }catch (Exception e){
             textView.setText("Cart Empty");
@@ -103,6 +106,7 @@ public class CartFragment extends Fragment {
                 placeOrder.setClickable(false);
                 Toast.makeText(getContext(), "Your Order has Been Placed", Toast.LENGTH_SHORT).show();
             }else{
+                //textView.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Please Add Items To Cart First", Toast.LENGTH_SHORT).show();
             }
         });

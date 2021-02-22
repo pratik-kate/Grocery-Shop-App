@@ -52,7 +52,7 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
         quantity = (ArrayList<String>) intent.getSerializableExtra(MainActivity.PRODUCTQUANTITY);
 
         for(int i=0;i<namee.size();i++){
-            namearr += namee.get(i)+":"+quantity.get(i)+";";
+            namearr += namee.get(i)+":"+quantity.get(i)+" ";
         }
         //Calculating total
         for(int j=0;j<price.size();j++){
