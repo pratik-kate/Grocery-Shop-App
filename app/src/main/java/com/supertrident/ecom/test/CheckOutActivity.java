@@ -1,12 +1,12 @@
 package com.supertrident.ecom.test;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -14,11 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.FirebaseDatabase;
 import com.razorpay.Checkout;
-import com.razorpay.CheckoutActivity;
 import com.razorpay.PaymentResultListener;
 import com.supertrident.ecom.R;
-import com.supertrident.ecom.test.models.CartModel;
-import com.supertrident.ecom.test.models.FinalModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -116,11 +113,7 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-
         });
-
 
     }
 
@@ -133,9 +126,9 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
         map.put("address", address.getEditText().getText().toString().trim());
         map.put("pincode", pincode.getEditText().getText().toString().trim());
         map.put("landmark", landmark.getEditText().getText().toString().trim());
-        map.put("Products", namearr);
-        map.put("PaymentId",s);
-        map.put("Amount",amount/100);
+        map.put("products", namearr);
+        map.put("paymentId",s);
+        map.put("amount",amount/100);
 
 
         FirebaseDatabase.getInstance().getReference().child("orders").child(name.getEditText().getText().toString().trim()).setValue(map)
