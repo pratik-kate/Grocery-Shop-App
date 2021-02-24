@@ -136,7 +136,7 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        Toast.makeText(CheckOutActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CheckOutActivity.this, "Order Placed", Toast.LENGTH_SHORT).show();
                         Intent home = new Intent(CheckOutActivity.this,MainActivity.class);
                         startActivity(home);
                     }
@@ -144,7 +144,7 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(CheckOutActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CheckOutActivity.this, "Please Try Again", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -98,6 +98,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             Intent intent1 = new Intent(ProductDetailActivity.this,BuyActivity.class);
             intent1.putExtra(MainActivity.PRODUCT,name);
             intent1.putExtra(MainActivity.PRODUCTQUANTITY,String.valueOf(count));
+            intent1.putExtra(MainActivity.PPRICE,price);
             startActivity(intent1);
         });
 
