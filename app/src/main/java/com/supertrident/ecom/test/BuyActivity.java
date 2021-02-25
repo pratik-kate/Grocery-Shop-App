@@ -93,7 +93,7 @@ public class BuyActivity extends AppCompatActivity implements Serializable, Paym
             }
 
             Checkout checkout = new Checkout();
-            checkout.setKeyID("rzp_test_w2JRJKGgRk1Q40");
+            checkout.setKeyID("rzp_test_GX2xUOm621SR7N");
             checkout.setImage(R.drawable.ic_shop);
             JSONObject object = new JSONObject();
             try {
@@ -102,8 +102,8 @@ public class BuyActivity extends AppCompatActivity implements Serializable, Paym
                 object.put("theme.color","#FF6D00");
                 object.put("currency","INR");
                 object.put("amount",amt);
-                object.put("prefill.contact","8530899088");
-                object.put("prefill.email","test@razorpay.com");
+//                object.put("prefill.contact","8530899088");
+//                object.put("prefill.email","test@razorpay.com");
 
                 checkout.open(BuyActivity.this,object);
 

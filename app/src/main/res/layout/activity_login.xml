@@ -96,6 +96,9 @@
             android:id="@+id/sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple"
             android:text="Sign in"
             android:textColor="#FFFFFF" />
 
@@ -122,7 +125,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple"
             android:text="sign up"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/googlesignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/common_google_signin_btn_icon_light"
+            android:focusable="true"
+            android:foreground="@drawable/ripple"
+            android:text="Log In With Google"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

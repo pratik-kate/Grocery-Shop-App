@@ -42,6 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bacground_back"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/ripple"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_back" />

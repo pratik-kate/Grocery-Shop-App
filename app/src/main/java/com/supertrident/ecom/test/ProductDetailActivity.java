@@ -90,7 +90,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             editor.putString(q,coun);
             editor.apply();
             editor.commit();
-            Toast.makeText(this, "Added "+p, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Added "+p, Toast.LENGTH_SHORT).show();
 
         });
 

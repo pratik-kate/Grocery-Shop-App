@@ -111,6 +111,9 @@
             android:id="@+id/sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple"
             android:text="Sign Up"
             android:textColor="#FFFFFF" />
 
@@ -137,6 +140,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple"
             android:text="sign in"
             android:textColor="#FFFFFF" />
     </LinearLayout>

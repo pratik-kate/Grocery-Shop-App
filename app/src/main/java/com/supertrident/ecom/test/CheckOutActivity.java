@@ -1,6 +1,7 @@
 package com.supertrident.ecom.test;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.supertrident.ecom.R;
@@ -96,7 +98,7 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
             }
 
             Checkout checkout = new Checkout();
-            checkout.setKeyID("rzp_test_w2JRJKGgRk1Q40");
+            checkout.setKeyID("rzp_test_GX2xUOm621SR7N");
             checkout.setImage(R.drawable.ic_shop);
             JSONObject object = new JSONObject();
             try {
@@ -105,8 +107,8 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
                 object.put("theme.color","#FF6D00");
                 object.put("currency","INR");
                 object.put("amount",amount);
-                object.put("prefill.contact","8530899088");
-                object.put("prefill.email","test@razorpay.com");
+//                object.put("prefill.contact","8530899088");
+//                object.put("prefill.email","test@razorpay.com");
 
                 checkout.open(CheckOutActivity.this,object);
 
@@ -129,6 +131,12 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
         map.put("products", namearr);
         map.put("paymentId",s);
         map.put("amount",amount/100);
+
+        String jsonString = new Gson().toJson(map);
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.HASHMAP, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(MainActivity.MAP, jsonString);
+        editor.apply();
 
 
         FirebaseDatabase.getInstance().getReference().child("orders").child(name.getEditText().getText().toString().trim()).setValue(map)
@@ -153,6 +161,22 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
     @Override
     public void onPaymentError(int i, String s) {
         Toast.makeText(this, "Payment Failed "+s, Toast.LENGTH_SHORT).show();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name.getEditText().getText().toString().trim());
+        map.put("phone", phone.getEditText().getText().toString().trim());
+        map.put("address", address.getEditText().getText().toString().trim());
+        map.put("pincode", pincode.getEditText().getText().toString().trim());
+        map.put("landmark", landmark.getEditText().getText().toString().trim());
+        map.put("products", namearr);
+        map.put("paymentId",s);
+        map.put("amount",amount/100);
+
+        String jsonString = new Gson().toJson(map);
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.HASHMAP, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(MainActivity.MAP, jsonString);
+        editor.apply();
 
     }
 }

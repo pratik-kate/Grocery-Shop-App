@@ -104,7 +104,7 @@ public class CartFragment extends Fragment {
                 adapter.notifyItemRangeRemoved(0, items.size());
                 adapter.notifyDataSetChanged();
                 placeOrder.setClickable(false);
-                Toast.makeText(getContext(), "Your Order has Been Placed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Your Order has Been Placed", Toast.LENGTH_SHORT).show();
             }else{
                 //textView.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Please Add Items To Cart First", Toast.LENGTH_SHORT).show();
