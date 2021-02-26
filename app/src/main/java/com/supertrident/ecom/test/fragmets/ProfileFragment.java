@@ -46,14 +46,22 @@ public class ProfileFragment extends Fragment {
 
         name = view.findViewById(R.id.pUser);
         email = view.findViewById(R.id.pEmail);
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         SharedPreferences preferences = getActivity().getSharedPreferences(MainActivity.INFO,MODE_PRIVATE);
         String uname = preferences.getString(MainActivity.USER,"user");
         String uemail = preferences.getString(MainActivity.EMAIL,"user@email.com");
 
-        name.setText(uname);
-        email.setText(uemail);
+        if(uname.contains("user")){
+            String nname = mFirebaseAuth.getCurrentUser().getDisplayName();
+            name.setText(nname);
+            String eemail = mFirebaseAuth.getCurrentUser().getEmail();
+            email.setText(eemail);
 
+        }else {
+            name.setText(uname);
+            email.setText(uemail);
+        }
 
         TextView v = view.findViewById(R.id.logout);
         TextView myorders = view.findViewById(R.id.myorders);
