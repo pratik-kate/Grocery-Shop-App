@@ -87,20 +87,21 @@
                 android:id="@+id/myorders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:drawableBottom="@drawable/line"
+                android:focusable="true"
                 android:fontFamily="serif"
+                android:foreground="@drawable/ripple"
                 android:padding="10dp"
                 android:text="My Orders"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:visibility="gone" />
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/line"
-                android:visibility="gone" />
+                android:src="@drawable/line" />
 
             <TextView
                 android:id="@+id/textView5"

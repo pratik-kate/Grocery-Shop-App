@@ -132,10 +132,9 @@ public class CheckOutActivity extends AppCompatActivity implements Serializable,
         map.put("paymentId",s);
         map.put("amount",amount/100);
 
-        String jsonString = new Gson().toJson(map);
         SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.HASHMAP, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(MainActivity.MAP, jsonString);
+        editor.putString(MainActivity.MAP, name.getEditText().getText().toString().trim());
         editor.apply();
 
 

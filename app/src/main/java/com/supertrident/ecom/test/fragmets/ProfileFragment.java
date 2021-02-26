@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.supertrident.ecom.R;
 import com.supertrident.ecom.test.LoginActivity;
 import com.supertrident.ecom.test.MainActivity;
+import com.supertrident.ecom.test.MyOrdersActivity;
 import com.supertrident.ecom.test.SplashActivity;
 
 import java.util.HashMap;
@@ -53,15 +54,13 @@ public class ProfileFragment extends Fragment {
         name.setText(uname);
         email.setText(uemail);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MainActivity.HASHMAP, MODE_PRIVATE);
-        String defValue = new Gson().toJson(new HashMap<String, List<String>>());
-        String json=sharedPreferences.getString(MainActivity.MAP,defValue);
-        TypeToken<HashMap<String,List<String>>> token = new TypeToken<HashMap<String,List<String>>>() {};
-        HashMap<String,List<String>> retrievedMap=new Gson().fromJson(json,token.getType());
 
-        retrievedMap.get("name");
         TextView v = view.findViewById(R.id.logout);
-        v.setText(retrievedMap.get("name").toString());
+        TextView myorders = view.findViewById(R.id.myorders);
+        myorders.setOnClickListener(v1 -> {
+            startActivity(new Intent(getContext(), MyOrdersActivity.class));
+        });
+
 
         v.setOnClickListener(v1 -> {
             FirebaseAuth.getInstance().signOut();
