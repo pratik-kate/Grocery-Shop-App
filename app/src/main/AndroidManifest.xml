@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.supertrident.ecom">
+    package="com.pratikcodes.ecom">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,21 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineSore">
-        <activity android:name=".test.MyOrdersActivity"></activity>
-        <activity android:name=".test.CheckOutActivity" />
-        <activity android:name=".test.ProductDetailActivity" />
-        <activity android:name=".test.ShopActivity" />
-        <activity android:name=".test.SignUpActivity" />
-        <activity android:name=".test.LoginActivity" />
-        <activity android:name=".test.SplashActivity">
+        <activity android:name="com.pratikcodes.shopclient.MyOrdersActivity"></activity>
+        <activity android:name="com.pratikcodes.shopclient.CheckOutActivity" />
+        <activity android:name="com.pratikcodes.shopclient.ProductDetailActivity" />
+        <activity android:name="com.pratikcodes.shopclient.ShopActivity" />
+        <activity android:name="com.pratikcodes.shopclient.SignUpActivity" />
+        <activity android:name="com.pratikcodes.shopclient.LoginActivity" />
+        <activity android:name="com.pratikcodes.shopclient.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".test.MainActivity" />
-        <activity android:name=".test.BuyActivity" />
+        <activity android:name="com.pratikcodes.shopclient.MainActivity" />
+        <activity android:name="com.pratikcodes.shopclient.BuyActivity" />
     </application>
 
 </manifest>

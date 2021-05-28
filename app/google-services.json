@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "353844679658",
-    "project_id": "grocery-shop-e8bee",
-    "storage_bucket": "grocery-shop-e8bee.appspot.com"
+    "project_number": "555007593461",
+    "project_id": "online-store-e8ff7",
+    "storage_bucket": "online-store-e8ff7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:353844679658:android:89d0277895cf92f234d893",
+        "mobilesdk_app_id": "1:555007593461:android:ba389d3c191c46ba8eaebc",
         "android_client_info": {
-          "package_name": "com.supertrident.ecom.test"
+          "package_name": "com.pratikcodes.shopclient"
         }
       },
       "oauth_client": [
         {
-          "client_id": "353844679658-1gqkmf3vik0uo1s9cajb8pgpsbmjs11t.apps.googleusercontent.com",
+          "client_id": "555007593461-cvjgi4si3pu974qg2nalreqh0v19os60.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pratikcodes.shopclient",
+            "certificate_hash": "cecf3ffb167365452b494ccb80bf84b509271edf"
+          }
+        },
+        {
+          "client_id": "555007593461-5bli3i5rk4o0kpnpnjajhq1lr3vts0od.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAk3qQ14MeNv1_kQMGBev4zWrnqzK_7kD4"
+          "current_key": "AIzaSyBNQNPeFh5N8YGiWaOjwhcTdrZtX7qMUFg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "353844679658-1gqkmf3vik0uo1s9cajb8pgpsbmjs11t.apps.googleusercontent.com",
+              "client_id": "555007593461-5bli3i5rk4o0kpnpnjajhq1lr3vts0od.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

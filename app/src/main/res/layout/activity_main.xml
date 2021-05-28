@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EAEAEA"
-    tools:context=".test.MainActivity">
+    tools:context="com.pratikcodes.shopclient.MainActivity">
 
     <LinearLayout
         android:id="@+id/screen"
